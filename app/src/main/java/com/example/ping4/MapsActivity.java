@@ -25,10 +25,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
 
-    public void goBack(View view){
-        //Intent intent = new Intent(getApplicationContext(),Compass.class);
-        //startActivity(intent);
+    public void compass(View view){
         finish();
+    }
+    public void maps(View view){
+        Toast.makeText(this,"Already on map page!", Toast.LENGTH_SHORT).show();
     }
 
     public void random(View view){
