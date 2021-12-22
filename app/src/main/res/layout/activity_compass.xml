@@ -6,15 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".Compass">
 
-    <Button
-        android:id="@+id/button"
+
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="55dp"
-        android:onClick="goToNext"
-        android:text="Button"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/space_5585774_1280" />
+
+    <Button
+        android:id="@+id/Compass"
+        android:layout_width="104dp"
+        android:layout_height="105dp"
+        android:layout_marginBottom="48dp"
+        android:background="@drawable/circle"
+        android:onClick="compass"
+        android:text="Compass"
+        android:textColor="#1CF614"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Maps"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/Maps"
+        android:layout_width="104dp"
+        android:layout_height="105dp"
+        android:layout_marginBottom="48dp"
+        android:background="@drawable/circle"
+        android:onClick="maps"
+        android:text="Maps"
+        android:textColor="#1CF614"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/Compass" />
 </androidx.constraintlayout.widget.ConstraintLayout>

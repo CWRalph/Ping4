@@ -26,8 +26,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ActivityMapsBinding binding;
 
     public void goBack(View view){
-        Intent intent = new Intent(getApplicationContext(),Compass.class);
-        startActivity(intent);
+        //Intent intent = new Intent(getApplicationContext(),Compass.class);
+        //startActivity(intent);
+        finish();
     }
 
     public void random(View view){
