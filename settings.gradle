@@ -1,0 +1,2 @@
+rootProject.name = "Ping4"
+include ':app'
