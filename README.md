@@ -1,4 +1,4 @@
-# Ping4
+# Ping
 
 ![logo](https://github.com/CWRalph/Ping4/blob/master/images/Ping-Logo-transparent.png)
 
