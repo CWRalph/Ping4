@@ -2,6 +2,7 @@ package com.example.ping4;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +24,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Random rand = new Random();
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
+
+    public void goBack(View view){
+        Intent intent = new Intent(getApplicationContext(),Compass.class);
+        startActivity(intent);
+    }
 
     public void random(View view){
         latitude = rand.nextInt(100);
