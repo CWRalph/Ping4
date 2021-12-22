@@ -28,8 +28,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         latitude = rand.nextInt(100);
         longitude = rand.nextInt(100);
         Log.i("Info", "Button Pressed");
-
-        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         LatLng position = new LatLng(latitude, longitude);
         mMap.addMarker(new MarkerOptions().position(position).title("Random Position").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position,10));
