@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Ping4</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_actual_compass">ActualCompass</string>
 </resources>
