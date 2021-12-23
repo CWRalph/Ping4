@@ -23,9 +23,24 @@
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
         android:background="#359c5e"
-        android:onClick="random"
+        android:onClick="center"
         android:padding="8dp"
-        android:text="wassup"
+        android:text="Center"
+        android:textColor="#ffffff" />
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="#359c5e"
+        android:onClick="ping"
+        android:padding="8dp"
+        android:text="Ping"
         android:textColor="#ffffff" />
     <Button
         android:id="@+id/Compass"

@@ -13,6 +13,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -79,5 +80,7 @@ public class Compass extends AppCompatActivity {
     public void updateLocationInfo(Location location){
         latitude = location.getLatitude();
         longitude = location.getLongitude();
+        float bearing = location.getBearing();
+        Log.i("Bearing",Float.toString(bearing));
     }
 }
