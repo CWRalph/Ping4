@@ -16,14 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ping4">
         <activity
-            android:name=".MainPage"
-            android:exported="false" />
-        <activity
-            android:name=".ActualCompass"
-            android:exported="false"
-            android:label="@string/title_activity_actual_compass"
-            android:theme="@style/Theme.Ping4.NoActionBar" />
-        <activity
             android:name=".MapsActivity"
             android:exported="true"
             android:label="@string/title_activity_maps" />
