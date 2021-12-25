@@ -39,32 +39,39 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ActivityMapsBinding binding;
     double latitude;
     double longitude;
+    Marker marker;
 
-    public void compass(View view){
+    public void compass(View view) {
         finish();
     }
-    public void maps(View view){
-        Toast.makeText(this,"Already on map page!", Toast.LENGTH_SHORT).show();
+
+    public void maps(View view) {
+        Toast.makeText(this, "Already on map page!", Toast.LENGTH_SHORT).show();
     }
 
-    public void center(View view){
-        LatLng position = new LatLng(latitude,longitude);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position,1));
+    public void center(View view) {
+        LatLng position = new LatLng(latitude, longitude);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 1));
     }
-    public void ping(View view){
+
+    public void ping(View view) {
         latlngs.add(new LatLng(latitude, longitude));
         //Moves the camera to the coordinates of everest
         // This creates a zoomed out camera view:  mMap.moveCamera(CameraUpdateFactory.newLatLng(everest));
         //This creates a more zoomed in camera view
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        Intent intent = getIntent();
+        Bundle b = getIntent().getExtras();
+        latitude = b.getDouble("Latitude");
+        longitude = b.getDouble("Longitude");
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+                // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -99,10 +106,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        //Change the type of map displayed
-        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        this.mMap = googleMap;
+        LatLng position = new LatLng(latitude, longitude);
+        marker = mMap.addMarker(new MarkerOptions().position(position).title("Person").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 1));
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -111,22 +120,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             startListening();
         }
     }
+
     public void startListening() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
         }
     }
 
-    public void updateLocationInfo(Location location){
-        latitude = location.getLatitude();
-        longitude = location.getLongitude();
-        LatLng position = new LatLng(latitude, longitude);
-        //Creates a marker at the position of the latlng object with a title
-        //THe icon changes the shape and colour of the pin on the map
-        mMap.addMarker(new MarkerOptions().position(position).title("Person").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-        //Moves the camera to the coordinates of everest
-        // This creates a zoomed out camera view:  mMap.moveCamera(CameraUpdateFactory.newLatLng(everest));
-        //This creates a more zoomed in camera view
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position,1));
+    public void updateLocationInfo(Location location) {
+        if (mMap != null) {
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+            LatLng position = new LatLng(latitude, longitude);
+            //Creates a marker at the position of the latlng object with a title
+            //THe icon changes the shape and colour of the pin on the map
+            if (marker != null){
+                marker.remove();
+            }
+            marker = mMap.addMarker(new MarkerOptions().position(position).title("Person").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+            Log.i("Here","Repeating");
+        }
     }
 }
