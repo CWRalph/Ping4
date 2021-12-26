@@ -20,7 +20,7 @@
             android:name=".Compass"
             android:exported="true" />
         <activity
-            android:name=".MapsActivity"
+            android:name=".PING"
             android:exported="true"
             android:label="@string/title_activity_maps" />
         <!--
@@ -36,7 +36,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".PING"
+            android:name=".MapsActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

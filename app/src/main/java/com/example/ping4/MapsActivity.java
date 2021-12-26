@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -28,7 +29,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.ping4.databinding.ActivityMapsBinding;
 
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     LocationManager locationManager;
@@ -40,6 +42,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     double latitude;
     double longitude;
     Marker marker;
+    boolean commence = false;
+    Bundle result = new Bundle();
+
+    //Dictionary containing our pings mapping to their indexes
+    Map pings = new HashMap();
+    int index = 0;
 
     public void compass(View view) {
         finish();
@@ -55,22 +63,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void ping(View view) {
-        latlngs.add(new LatLng(latitude, longitude));
-        //Moves the camera to the coordinates of everest
-        // This creates a zoomed out camera view:  mMap.moveCamera(CameraUpdateFactory.newLatLng(everest));
-        //This creates a more zoomed in camera view
+        //Get initial ping from user
+        Intent intent = new Intent(this,PING.class);
+        intent.putExtra("Boolean",commence);
+        startActivityForResult(intent,1);
+        commence = true;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        Intent intent = getIntent();
-        Bundle b = getIntent().getExtras();
-        latitude = b.getDouble("Latitude");
-        longitude = b.getDouble("Longitude");
-        latlngs.add(new LatLng(latitude,longitude));
 
                 // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -92,6 +98,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if (lastKnownLocation != null) {
                 updateLocationInfo(lastKnownLocation);
+            }
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+                result = data.getExtras();
+                latitude = result.getDouble("Latitude");
+                Toast.makeText(this,Double.toString(latitude),Toast.LENGTH_SHORT).show();
+                longitude = result.getDouble("Longitude");
+                String name = result.getString("pingName");
+                LatLng position = new LatLng(latitude,longitude);
+                marker = mMap.addMarker(new MarkerOptions().position(position).title(name).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 1));
             }
         }
     }
@@ -129,17 +151,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void updateLocationInfo(Location location) {
-        if (mMap != null) {
-            latitude = location.getLatitude();
-            longitude = location.getLongitude();
-            LatLng position = new LatLng(latitude, longitude);
+        //if (mMap != null) {
+            //latitude = location.getLatitude();
+            //longitude = location.getLongitude();
+            //LatLng position = new LatLng(latitude, longitude);
             //Creates a marker at the position of the latlng object with a title
             //THe icon changes the shape and colour of the pin on the map
-            if (marker != null){
-                marker.remove();
-            }
-            marker = mMap.addMarker(new MarkerOptions().position(position).title("Person").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-            Log.i("Here","Repeating");
-        }
+            //if (marker != null){
+                //marker.remove();
+            //}
+            //marker = mMap.addMarker(new MarkerOptions().position(position).title("Person").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+            //Log.i("Here","Repeating");
+        //}
     }
 }

@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -16,6 +17,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class PING extends AppCompatActivity {
     LocationManager locationManager;
@@ -24,12 +30,22 @@ public class PING extends AppCompatActivity {
     double longitude;
 
     public void ping_location(View view){
-        Intent intent = new Intent(this,MapsActivity.class);
+        //Create the intent and store location data
+        Intent returnIntent = new Intent();
         Bundle b = new Bundle();
         b.putDouble("Latitude",latitude);
         b.putDouble("Longitude",longitude);
-        intent.putExtras(b);
-        startActivity(intent);
+
+        //Code for the name of the ping
+        EditText nameEditText = (EditText) findViewById(R.id.editTextName);
+        if (nameEditText.getText().toString() != null){
+            b.putString("pingName",nameEditText.getText().toString());
+            returnIntent.putExtras(b);
+            setResult(Activity.RESULT_OK,returnIntent);
+            finish();
+        }else{
+            Toast.makeText(this,"Please enter a name for your ping",Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
