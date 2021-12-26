@@ -35,7 +35,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     LocationListener locationListener;
     private GoogleMap mMap;
     private MarkerOptions options = new MarkerOptions();
-    private ArrayList<LatLng> latlngs = new ArrayList<>();
+    private ArrayList<LatLng> latlngs = new ArrayList<LatLng>();
     private ActivityMapsBinding binding;
     double latitude;
     double longitude;
@@ -70,6 +70,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Bundle b = getIntent().getExtras();
         latitude = b.getDouble("Latitude");
         longitude = b.getDouble("Longitude");
+        latlngs.add(new LatLng(latitude,longitude));
 
                 // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
