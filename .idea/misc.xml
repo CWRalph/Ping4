@@ -4,8 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/colwy/AndroidStudioProjects/Ping4/app/src/main/res/layout/activity_compass.xml" value="0.20471014492753623" />
-        <entry key="..\:/Users/colwy/AndroidStudioProjects/Ping4/app/src/main/res/layout/activity_maps.xml" value="0.2015625" />
+        <entry key="..\:/Users/colwy/AndroidStudioProjects/Ping4/app/src/main/res/layout/activity_maps.xml" value="0.25" />
         <entry key="..\:/Users/colwy/AndroidStudioProjects/Ping4/app/src/main/res/layout/activity_ping.xml" value="0.2015625" />
+        <entry key="..\:/Users/colwy/AndroidStudioProjects/Ping4/app/src/main/res/layout/activity_show_waypoints.xml" value="0.22327898550724637" />
         <entry key="..\:/Users/james/StudioProjects/Ping4/app/src/main/res/layout/activity_compass.xml" value="0.25" />
         <entry key="..\:/Users/james/StudioProjects/Ping4/app/src/main/res/layout/activity_main_page.xml" value="0.264" />
       </map>

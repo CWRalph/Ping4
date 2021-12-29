@@ -16,6 +16,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -39,18 +40,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private MarkerOptions options = new MarkerOptions();
     private ArrayList<LatLng> latlngs = new ArrayList<LatLng>();
     private ActivityMapsBinding binding;
-    double latitude;
-    double longitude;
-    Marker marker;
+    double latitude,longitude;
+    Marker marker,person;
     boolean commence = false;
     Bundle result = new Bundle();
+    ArrayList<String> array_result = new ArrayList<>();
+    Button btn_ping_list;
 
     //Dictionary containing our pings mapping to their indexes
     Map pings = new HashMap();
     int index = 0;
 
     public void compass(View view) {
-        finish();
+        //Creates an intent which is the other activity
+        Intent intent = new Intent(getApplicationContext(), Compass.class);
+        //Start activity activates the intent
+        startActivity(intent);
     }
 
     public void maps(View view) {
@@ -65,15 +70,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void ping(View view) {
         //Get initial ping from user
         Intent intent = new Intent(this,PING.class);
-        intent.putExtra("Boolean",commence);
+        //intent.putExtra("Boolean",commence);
         startActivityForResult(intent,1);
-        commence = true;
+        //commence = true;
+    }
+
+    public void ping_list(View view){
+        Intent intent = new Intent(this,ShowWaypoints.class);
+        //intent.putExtra("Boolean",commence);
+        startActivityForResult(intent,2);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        btn_ping_list = findViewById(R.id.ping_list);
 
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -82,7 +93,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
 
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
@@ -100,20 +110,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 updateLocationInfo(lastKnownLocation);
             }
         }
+
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
+            //Result from PING
             if (resultCode == Activity.RESULT_OK) {
                 result = data.getExtras();
                 latitude = result.getDouble("Latitude");
-                Toast.makeText(this,Double.toString(latitude),Toast.LENGTH_SHORT).show();
                 longitude = result.getDouble("Longitude");
-                String name = result.getString("pingName");
                 LatLng position = new LatLng(latitude,longitude);
+                String name = result.getString("pingName");
+                MyApplication myApplication = (MyApplication) getApplicationContext();
+                myApplication.add_value(name,position);
+
                 marker = mMap.addMarker(new MarkerOptions().position(position).title(name).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 1));
+            }
+        }
+
+        if (requestCode == 2) {
+            //Result from ping list
+            if (resultCode == Activity.RESULT_OK) {
+                array_result = data.getStringArrayListExtra("remove_array");
+                MyApplication myApplication = (MyApplication) getApplicationContext();
+                for (String x : array_result){
+                    myApplication.remove_value(x);
+                }
             }
         }
     }
@@ -151,17 +176,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void updateLocationInfo(Location location) {
-        //if (mMap != null) {
-            //latitude = location.getLatitude();
-            //longitude = location.getLongitude();
-            //LatLng position = new LatLng(latitude, longitude);
+        if (mMap != null) {
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+            LatLng position = new LatLng(latitude, longitude);
             //Creates a marker at the position of the latlng object with a title
             //THe icon changes the shape and colour of the pin on the map
-            //if (marker != null){
-                //marker.remove();
-            //}
-            //marker = mMap.addMarker(new MarkerOptions().position(position).title("Person").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-            //Log.i("Here","Repeating");
-        //}
+            if (person != null){
+                person.remove();
+            }
+            person = mMap.addMarker(new MarkerOptions().position(position).title("Person").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+            Log.i("Here","Repeating");
+        }
     }
 }

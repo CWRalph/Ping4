@@ -89,6 +89,6 @@ public class PING extends AppCompatActivity {
         latitude = location.getLatitude();
         longitude = location.getLongitude();
         float bearing = location.getBearing();
-        Log.i("Bearing",Float.toString(bearing));
+        Log.i("Bearing",Double.toString(longitude));
     }
 }

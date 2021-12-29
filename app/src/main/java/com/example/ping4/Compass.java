@@ -26,10 +26,7 @@ public class Compass extends AppCompatActivity {
     double longitude;
 
     public void maps(View view) {
-        //Creates an intent which is the other activity
-        Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
-        //Start activity activates the intent
-        startActivity(intent);
+        finish();
     }
     public void printPosition(View view){
         Toast.makeText(this,"Latitude: "+ Double.toString(latitude) + ", Longitude: " + Double.toString(longitude),Toast.LENGTH_SHORT).show();

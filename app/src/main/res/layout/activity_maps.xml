@@ -7,13 +7,13 @@
     <fragment
         android:id="@+id/map"
         class="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -26,13 +26,14 @@
         android:onClick="center"
         android:padding="8dp"
         android:text="Center"
-        android:textColor="#ffffff" />
+        android:textColor="#212121" />
+
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/ping_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
@@ -41,31 +42,48 @@
         android:onClick="ping"
         android:padding="8dp"
         android:text="Ping"
-        android:textColor="#ffffff" />
+        android:textColor="#212121" />
+
+    <Button
+        android:id="@+id/ping_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="#359c5e"
+        android:onClick="ping_list"
+        android:padding="8dp"
+        android:text="ping list"
+        android:textColor="#212121" />
+
     <Button
         android:id="@+id/Compass"
-        android:layout_width="104dp"
+        android:layout_width="wrap_content"
         android:layout_height="105dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="50dp"
         android:layout_marginBottom="48dp"
         android:background="@drawable/circle"
         android:onClick="compass"
         android:text="Compass"
-        android:layout_marginStart="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
         android:textColor="#1CF614" />
 
     <Button
         android:id="@+id/Maps"
-        android:layout_width="104dp"
-        android:layout_height="105dp"
-        android:layout_marginBottom="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="102dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="51dp"
         android:background="@drawable/circle"
         android:onClick="maps"
         android:text="Maps"
-        android:layout_marginEnd="50dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:textColor="#1CF614"/>
+        android:textColor="#1CF614" />
 
 </RelativeLayout>
