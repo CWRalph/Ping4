@@ -11,25 +11,24 @@
         android:id="@+id/ping_button"
         android:layout_width="191dp"
         android:layout_height="167dp"
-        android:layout_marginBottom="150dp"
         android:onClick="ping_location"
         android:text="PING"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="414dp" />
 
     <EditText
         android:id="@+id/editTextName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="118dp"
         android:ems="10"
         android:hint="Name of Ping"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/ping_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
